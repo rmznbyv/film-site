@@ -1,0 +1,705 @@
+<html>
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="never">
+<script src="https://cdn.imgz.me/player/ifr/fast/js/jquery.min.js"></script>
+</head>
+<body style="margin:0;padding:0;">
+<script>
+var id = '';
+
+!function(e){var n=!1;if("function"==typeof define&&define.amd&&(define(e),n=!0),"object"==typeof exports&&(module.exports=e(),n=!0),!n){var o=window.Cookies,t=window.Cookies=e();t.noConflict=function(){return window.Cookies=o,t}}}(function(){function g(){for(var e=0,n={};e<arguments.length;e++){var o=arguments[e];for(var t in o)n[t]=o[t]}return n}return function e(l){function C(e,n,o){var t;if("undefined"!=typeof document){if(1<arguments.length){if("number"==typeof(o=g({path:"/"},C.defaults,o)).expires){var r=new Date;r.setMilliseconds(r.getMilliseconds()+864e5*o.expires),o.expires=r}o.expires=o.expires?o.expires.toUTCString():"";try{t=JSON.stringify(n),/^[\{\[]/.test(t)&&(n=t)}catch(e){}n=l.write?l.write(n,e):encodeURIComponent(String(n)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),e=(e=(e=encodeURIComponent(String(e))).replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent)).replace(/[\(\)]/g,escape);var i="";for(var c in o)o[c]&&(i+="; "+c,!0!==o[c]&&(i+="="+o[c]));return document.cookie=e+"="+n+i}e||(t={});for(var a=document.cookie?document.cookie.split("; "):[],s=/(%[0-9A-Z]{2})+/g,f=0;f<a.length;f++){var p=a[f].split("="),d=p.slice(1).join("=");this.json||'"'!==d.charAt(0)||(d=d.slice(1,-1));try{var u=p[0].replace(s,decodeURIComponent);if(d=l.read?l.read(d,u):l(d,u)||d.replace(s,decodeURIComponent),this.json)try{d=JSON.parse(d)}catch(e){}if(e===u){t=d;break}e||(t[u]=d)}catch(e){}}return t}}return(C.set=C).get=function(e){return C.call(C,e)},C.getJSON=function(){return C.apply({json:!0},[].slice.call(arguments))},C.defaults={},C.remove=function(e,n){C(e,"",g(n,{expires:-1}))},C.withConverter=e,C}(function(){})});
+function sc(a, d, b) {
+    var e = new Date();
+    e.setDate(e.getDate() + b);
+    var c = escape(d) + ((b == null) ? "" : "; expires=" + e.toUTCString());
+    document.cookie = a + "=" + c + "; path=/"
+}
+function rc(name, path, dom) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +  (dom ? "; domain=" + dom : "") +  (path ? "; path=" + path : "");
+}
+function gc(name) {
+	var value = "; " + document.cookie;
+	var parts = value.split("; " + name + "=");
+	if (parts.length == 2) return parts.pop().split(";").shift();
+}
+function randomId() {
+	return 'id' + Math.random().toString(36).slice(-5);
+}
+function getLocation(url) {
+	var el = document.createElement('a');
+	el.href = url;
+	return el;
+}
+</script>
+<div id="playerArea"></div>
+
+
+
+<script src="https://cdn.imgz.me/player/ifr/vod/jw-8.21.1/jwplayer.js"></script>
+<style>
+* {
+	-webkit-transition: none !important;
+	transition: none !important;
+}
+.jw-tab-focus:focus, video:focus {
+    outline: none;
+}
+/*.jw-icon-rewind { display:none; }*/
+.jw-controlbar .jw-option {
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    list-style: none;
+    height: 1.95em;
+    font-family: inherit;
+    line-height: 2em;
+    padding: 0 1.3em;
+    font-size: .9em;
+    margin: 0;
+}
+.jw-option.jw-active-option {
+    color: #fff !important;
+    background-color: hsla(0,0%,100%,.15) !important;
+}
+.jw-slider-volume .jw-knob.jw-reset { width: 13px !important; height: 13px !important; margin-left:-1px; }
+.jw-icon-playback:before {
+    color: #88d0ff !important;
+}
+.jw-display-icon-container .jw-icon { color: #fff !important; }
+.jw-option.jw-active-option { background-color: transparent !important; }
+
+.jw-selection-menu .jw-menu-selection-text {
+	line-height: 2.9em;
+}
+.jw-knob {
+    background-color: #fff !important;
+    height: 18px !important;
+    width: 18px !important;
+    width: 18px !important;
+}
+.jw-progress { background: #f00 !important; background: #0099ff !important;}
+.jw-knob:after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    /*background: #006bb3;*/
+    background:none;
+    border-radius: 100%;
+}
+.jw-rightclick-list { display:none !important; }
+.jw-logo {
+     margin-top: 55px !important;
+     margin-right:30px;
+     width: 219px !important;
+     height: 55px !important;
+}
+.jw-settings-submenu .jw-submenu-topbar {
+    /*box-shadow: none !important;
+    background-color: #272626 !important;*/
+    margin: -8px -20px 0 -5px !important;
+    margin-bottom: 13px !important;
+}
+.jw-settings-menu { z-index:2; }
+.jw-breakpoint-7 .jw-settings-menu { height: auto !important; width: 20% !important; }
+.jw-settings-submenu { padding: 8px 20px 7px 5px !important; }
+.jw-settings-playbackRates { order: 1 !important; }
+.jw-settings-captions { order: 1 !important; }
+.jw-settings-close { order: 2 !important; }
+
+.jw-breakpoint-4 .jw-settings-menu, .jw-breakpoint-3 .jw-settings-menu { height: auto !important; max-height: 268px !important; }
+.jw-captions .jw-text-track-cue { line-height: 1.15em !important; }
+
+[button="dilsec-btn"] .jw-button-image { -webkit-filter: invert(1); filter: invert(100%); zoom: 0.8; }
+.jw-slider-horizontal .jw-slider-container {
+    height: 10px;
+}
+
+.jw-time-thumb {
+    border: 2px solid #fff !important;
+}
+.jw-time-tip .jw-text { background: none; color: #fff; padding: 0px 10px; padding-top:10px; font-size:14px; }
+.jw-time-tip::after, .jw-controlbar .jw-tooltip::after, .jw-settings-menu .jw-tooltip::after { display:none !important; }
+.jw-time-tip, .jw-controlbar .jw-tooltip, .jw-settings-menu .jw-tooltip { box-shadow: none; }
+
+/* 16 dec 2020 */
+.jw-progress {
+    border-radius: 3px;
+}
+.jw-buffer { border-radius: 3px; }
+.jw-slider-horizontal .jw-slider-container {
+    height: 9px;
+    border-radius: 3px;
+    width: 97.5%;
+    margin: 0 auto;
+}
+.jw-rail {
+    border-radius: 3px;
+}
+.jw-slider-time .jw-rail, .jw-horizontal-volume-container .jw-rail, .jw-slider-time .jw-buffer, .jw-horizontal-volume-container .jw-buffer, .jw-slider-time .jw-progress, .jw-horizontal-volume-container .jw-progress, .jw-slider-time .jw-cue, .jw-horizontal-volume-container .jw-cue {
+    -webkit-transform: translate(0, -50%) !important;
+    transform: translate(0, -50%) !important;
+}
+/* vst */
+.jw-breakpoint-7 .jw-skip {
+    top: 20px;
+    right: 20px;
+}
+.jw-skip {
+    padding: 1.09em 1em;
+    top: 10px;
+    right: 10px;
+    border-radius: 4px;
+    z-index: 99999999 !important;
+}
+.jw-skip.jw-skippable {
+    padding: 1.09em 1em !important;
+}
+.jw-skip .jw-text {
+    font-size: 0.95em;
+    font-weight: normal;
+    color: #fff;
+}
+.jw-breakpoint-7 .jw-skip .jw-text {
+    font-size: 1.1em;
+    color: #fff;
+}
+.jw-settings-content-item { font-size:14px; }
+.ql-ust-label { font-weight:normal; font-size:11px; top:-1px; margin-left:2px; padding: 3px; padding-left:5px; padding-right:5px; border-radius: 5px; background:#1c89bd; color:#fff; position:relative; }
+.jw-state-idle .jw-controls {
+    background: rgba(0,0,0,0.2);
+}
+</style>
+<script>
+var sources = [];
+var err = 0;
+var tr = true;
+var autoQuality = 1;
+var freezeCnt = 0;
+var audioLoaded = 0;
+var defAudioTrack = -1;
+var defAudioSelected = 0;
+var played = 0;
+var audioTracks = [];
+var curCaptions = [];
+var currentAudioTrackIndex = 0;
+var curCaptionIndex = 0;
+var forcedCaption = false;
+var qlSelected = 0;
+
+var jwSetup = {
+	width: '100%',
+	height: '100%',
+	fallback: 'false',
+	primary: 'html5',
+    fullscreen: "true",
+	autostart: false,
+	androidhls: true,
+	preload: 'none',
+    hlshtml: true,
+    captions: {
+    color: "#ffffff",
+    fontFamily: "Arial",
+    fontOpacity: 100,
+    fontSize: 18,
+    edgeStyle: "raised",
+    backgroundColor: "#000000",
+    backgroundOpacity: 0
+    }
+};
+jwSetup.sources = [{
+	"default": true,
+	"file": "\x68\x74\x74\x70\x73\x3a\x2f\x2f\x73\x32\x34\x2e\x6d\x69\x63\x68\x61\x65\x6c\x73\x6f\x6e\x2e\x78\x79\x7a\x2f\x6d\x30\x2f\x49\x7a\x49\x68\x6f\x32\x30\x68\x47\x54\x49\x30\x59\x79\x45\x62\x4d\x4b\x57\x79\x59\x78\x57\x79\x59\x78\x41\x75\x70\x7a\x35\x75\x4d\x32\x48\x68\x5a\x77\x4e\x6c\x5a\x46\x35\x50\x6f\x55\x49\x6c\x4c\x4b\x78\x68\x5a\x47\x4e\x34\x5a\x55\x4e\x68\x45\x53\x49\x4f\x47\x4e\x64\x30\x7a\x78\x6f\x4a\x79\x77\x6e\x54\x53\x79\x6f\x55\x41\x69\x6f\x76\x35\x34\x72\x4b\x62\x66\x4c\x7a\x53\x68\x4d\x55\x79\x69\x70\x54\x53\x78\x6e\x55\x79\x75\x72\x46\x35\x34\x72\x4b\x62\x66\x4d\x7a\x49\x66\x70\x32\x49\x68\x71\x54\x75\x75\x6f\x50\x35\x34\x72\x4b\x62\x66\x72\x7a\x75\x63\x4d\x32\x6b\x35\x4c\x4a\x57\x6d\x6e\x32\x79\x63\x59\x7a\x4d\x31\x6f\x74\x73\x30\x78\x69\x32\x34\x76\x72\x31",
+	"label": "0",
+	"type": "hls"
+}];
+
+jwSetup['image'] = 'https://imgz.me/cover/tt7097896/664x386/3.jpg';
+
+jwSetup.tracks = [{"kind":"captions","file":"https:\/\/s24.imgz.me\/m8\/IzIho20hGTI0YyEbMKWyYxWyYxAupz5uM2HhZwNlZF5PoUIlLKxhZGN4ZUNhESIOGN\/tur-1-default.vtt","label":"T\u00fcrk\u00e7e Altyaz\u0131"},{"kind":"captions","file":"https:\/\/s24.imgz.me\/m3\/IzIho20hGTI0YyEbMKWyYxWyYxAupz5uM2HhZwNlZF5PoUIlLKxhZGN4ZUNhESIOGN\/eng-2.vtt","label":"\u0130ngilizce Altyaz\u0131"},{"kind":"thumbnails","file":"https:\/\/s24.imgz.me\/t\/IzIho20hGTI0YyEbMKWyYxWyYxAupz5uM2HhZwNlZF5PoUIlLKxhZGN4ZUNhESIOGN\/thumbs.vtt"}];
+var mu = getLocation(jwSetup.sources[0].file);
+
+var jwpl = jwplayer('playerArea').setup(jwSetup);
+var updateQualityText = function(lbl) {
+    var label = '';
+    if (lbl) {
+        label = lbl;
+    } else {
+        label = convertQualityLabel(jwpl.getQualityLevels()[jwpl.getCurrentQuality()]['width']);
+    }
+	if (label.length > 1) {
+		$('.ql').show().html('Sabit Kalite: <b class="sabit-ql">'+label+'</b>');
+    }
+};
+
+var jwMenuAc = function() {
+    $('.jw-tooltip').removeClass('jw-open');
+    $('.jw-controls').addClass('jw-settings-open');
+    $('.jw-settings-menu').attr('aria-expanded', 'true');
+    $('.jw-settings-submenu-audioTracks').addClass('jw-settings-submenu-active');
+    $('.jw-settings-submenu-audioTracks .jw-settings-submenu-active').attr('aria-expanded', 'true');
+    
+    $('.jw-settings-topbar .jw-icon.jw-settings-audioTracks').attr('aria-expanded', 'false');
+    $('.jw-settings-topbar .jw-icon.jw-settings-audioTracks').attr('aria-expanded', 'true');
+};
+var jwMenuKapa = function() {
+    $('.jw-controls').removeClass('jw-settings-open');
+    $('.jw-settings-menu').attr('aria-expanded', 'false');
+    $('.jw-submenu-audioTracks').attr('aria-expanded', 'false');
+    $('.jw-settings-submenu-audioTracks').removeClass('jw-settings-submenu-active').attr('aria-expanded', 'false');
+};
+
+$('body').on('click touchstart', '.jw-settings-submenu-button, .jw-submenu-captions, .jw-submenu-quality, .jw-submenu-playbackRates', function(){
+    $('.jw-submenu-audioTracks').attr('aria-expanded', 'false');
+    $('.jw-settings-submenu-audioTracks').removeClass('jw-settings-submenu-active').attr('aria-expanded', 'false');
+});
+$('body').on('click touchstart', '.jw-settings-close', function(){
+    $('.jw-controls').removeClass('jw-settings-open');
+    $('.jw-settings-menu').attr('aria-expanded', 'false');
+    $('.jw-submenu-audioTracks').attr('aria-expanded', 'false');
+    $('.jw-settings-submenu-audioTracks').removeClass('jw-settings-submenu-active').attr('aria-expanded', 'false');
+    $('.jw-settings-topbar .jw-icon.jw-settings-audioTracks').attr('aria-expanded', 'false');
+});
+
+jwpl.on('ready', function(){
+	var observer = new MutationObserver(function(mutations) {
+		var controlBarStatus = $('.jw-flag-user-inactive').length ? 0 : 1;
+		if (controlBarStatus) {
+			$('.ql').show();
+		} else {
+			$('.ql').hide();
+		}
+	});
+	observer.observe(document.querySelector('.jwplayer'), {
+		attributes: true
+	});
+	$('.jw-media').prepend('<div class="ql" style="display:none; width:190px;height:30px; font: normal 16px arial; line-height:30px; text-align:right; color:#fff; background:#0000; border-radius:6px; position:absolute; top:20px;right:20px; z-index:1;"></div>');
+    
+    /*jwpl.addButton("img/jw-fw.svg", "10 saniye ileri", function () {
+        jwpl.seek(jwpl.getPosition() + 10);
+    }, "Next 10s");
+    jwpl.addButton("img/jw-bw.svg", "10 saniye geri", function () {
+        jwpl.seek(jwpl.getPosition() - 10);
+    }, "Back 10s");*/
+    
+    /*var video = document.getElementById(this.id).getElementsByTagName('video')[0];
+    if (video) video.setAttribute('poster', this.getConfig().image);*/
+});
+jwpl.on('time', function(e) {
+	var pos = Math.floor(e.position);
+	if (id && pos % 10 == 0) {
+		Cookies.set('fstpos_' + id, pos, { expires: 0.5 });
+	}
+    if (e.position > 1) {
+        if (!defAudioSelected && defAudioTrack > -1) {
+            defAudioSelected = 1;
+            jwpl.setCurrentAudioTrack(defAudioTrack);
+        }
+    }
+});
+jwpl.on('seek', function(e) {
+	var pos = Math.floor(e.position);
+	if (id) {
+		Cookies.set('fstpos_' + id, pos, { expires: 0.5 });
+    }
+});
+jwpl.on('play', function(){
+	if (id) {
+		var pos = gc('fstpos_' + id);
+		if (pos && pos < jwpl.getDuration() && !played) { 
+			jwpl.seek(pos); 
+			console.log(pos);
+		}
+    }
+	$('.jw-settings-submenu-audioTracks .jw-settings-content-item').each(function(){
+        if ($(this).text().indexOf(' Ses') == -1) {
+            $(this).append(' Ses');
+        }
+	});
+	setTimeout(function(){
+        if ($('.jw-time-thumb').width() < 1) {
+            $('.jw-time-thumb').remove();
+        }
+	}, 3000);
+	if (!played)
+	{
+        var curQualityIndex = jwpl.getCurrentQuality();
+        if (curQualityIndex > 0 && !qlSelected) {
+            qlSelected = 1;
+            jwpl.setCurrentQuality(0);
+        }
+        jwFixLabel();
+        jwFixAutoLabel();
+    }
+    played = 1;
+});
+jwpl.on('complete', function(){
+    Cookies.remove('fstpos_' + id);
+    console.log('fstpos_' + id);
+});
+jwpl.on('captionsList', function(item){
+    item.tracks.forEach(function(track, i){
+        if (track.id == 'off') return;
+        if (track.id.match(/forced/i)) {
+            forcedCaption = true;
+            jwpl.setCurrentCaptions(i);
+            setTimeout(function(){
+                var forcedBtnEl = $('.jw-settings-submenu-captions .jw-settings-submenu-items .jw-settings-content-item').eq(i);
+                var forcedBtnElClone = $('.jw-settings-submenu-captions .jw-settings-submenu-items .jw-settings-content-item').eq(i).text('Default');
+                forcedBtnEl.remove();
+                $('.jw-settings-submenu-captions .jw-settings-submenu-items .jw-settings-content-item[aria-label="Kapalı"]').remove();
+                $('.jw-settings-submenu-captions .jw-settings-submenu-items').prepend(forcedBtnElClone);
+                //$('.jw-settings-submenu-captions .jw-settings-submenu-items .jw-settings-content-item').eq(i).hide();
+            }, 1000);
+        }
+    });
+});
+jwpl.on('audioTracks', function(item) {
+    audioTracks = item.tracks;
+    currentAudioTrackIndex = item.currentTrack;
+    var currAudioTrack = audioTracks[currentAudioTrackIndex];
+    if (jwpl.getCaptionsList().length > 1) {
+        if (currAudioTrack.language != 'tr') {
+            if (curCaptionIndex !== 1)  {
+                jwpl.setCurrentCaptions(1);
+            }
+        } else {
+            if (curCaptionIndex !== 0 && !forcedCaption) {
+                jwpl.setCurrentCaptions(0);
+            }
+        }
+    }
+    // default audio
+    if (audioTracks[0].language != 'tr') {
+        for (var i = 0; i < audioTracks.length; i++) {
+            if (audioTracks[i].language == 'tr') {
+                defAudioTrack = i;
+            }
+        }
+    }
+    if (!audioLoaded && audioTracks.length > 1) {
+        jwpl.addButton(
+            "/ifr/vod/img/langx.svg",
+            "Dublaj Dili",
+            function() {
+                if ($('.jw-settings-open').length == 0) {
+                    jwMenuAc();
+                } else {
+                    jwMenuKapa();
+                }
+                /*dilSecClick();*/
+            },
+            "dilsec-btn"
+        );
+    }
+    audioLoaded = 1;
+});
+
+jwpl.on('captionsChanged', function(item){
+    curCaptions = item.tracks[item.track];
+    curCaptionIndex = item.track;
+    var curCaption = item.tracks[curCaptionIndex];
+    if (curCaption.id != 'off') {
+        if (curCaption.label.indexOf('Türkçe') > -1 && audioTracks.length > 0) {
+            audioTracks.every(function(track){
+                if (track.language != 'tr') {
+                    if (track.hlsjsIndex != currentAudioTrackIndex) {
+                        jwpl.setCurrentAudioTrack(track.hlsjsIndex);
+                        return false;
+                    }
+                }
+                return true;
+            });
+        }
+    }
+});
+
+function convertQualityLabel(w)
+{
+    var ql = '';
+    if (w >= 4100 && w < 8000) {
+        ql = '4320';
+    } else if (w >= 3200 && w < 4100) {
+        ql = '2160';
+    } else if (w >= 2100 && w < 3200) {
+        ql = '1440';
+    } else if (w >= 1500 && w < 2100) {
+        ql = '1080';
+    } else if (w >= 1000 && w < 1500) {
+        ql = '720';
+    } else if (w >= 750 && w < 1000) {
+        ql = '480';
+    } else if (w >= 550 && w < 750) {
+        ql = '360';
+    } else if (w >= 350 && w < 550) {
+        ql = '240';
+    } else if (w >= 150 && w < 350) {
+        ql = '144';
+    }
+    qlLabel = ql + 'p';
+    if (ql == '4320') {
+        qlLabel += ' (8K)';
+    } else if (ql == '2160') {
+        qlLabel += ' (4K)';
+    } else if (ql == '1440') {
+        qlLabel += ' (2K)';
+    }
+    return qlLabel;
+}
+function jwFixLabel()
+{
+    $('.jw-settings-content-item').each(function(){
+        var el = $(this);
+        var oldLabel = el.text();
+        jwpl.getQualityLevels().forEach(function(item){
+            if (item.label == oldLabel) {
+                var label = convertQualityLabel(item.width);
+                el.text(label).attr('aria-label', label);
+            }
+        });
+    });
+}
+
+function jwFixAutoLabel(ms)
+{
+    /*$('.jw-auto-label').css('visibility', 'hidden');*/
+    var autoLabelWait = setInterval(function() {
+        if ($('.jw-auto-label').length > 0) {
+            /*console.log('wait');*/
+            clearInterval(autoLabelWait);
+            $('.jw-auto-label').each(function(){
+                var el = $(this);
+                var oldLabel = el.text();
+                jwpl.getQualityLevels().forEach(function(item){
+                    if (item.label == oldLabel) {
+                        var label = convertQualityLabel(item.width);
+                        if (oldLabel != label) {
+                            el.text(label);
+                        }
+                        /*$('.jw-auto-label').css('visibility', 'visible');*/
+                        //$('.ql').html('Oto Kalite: <b><span class="ql-ust-label">'+label+'</span></b>');
+                    }
+                });
+            });
+        }
+    }, ms ? ms : 100);
+}
+function updateTopAutoLabel(oto)
+{
+    var label = '';
+    if (oto) {
+        label = convertQualityLabel(jwpl.getQualityLevels()[jwpl.getVisualQuality().level.index]['width']);
+        $('.ql').html('Oto Kalite: <b><span class="ql-ust-label">'+label+'</span></b>');
+    } else {
+        label = convertQualityLabel(jwpl.getQualityLevels()[jwpl.getCurrentQuality()]['width']);
+        updateQualityText(label);
+    }
+}
+
+
+/*
+jwpl.on('levels', function(){
+    var qlLevels = jwpl.getQualityLevels();
+    var curQualityIndex = jwpl.getCurrentQuality();
+    if (curQualityIndex === 1) {
+        jwpl.setCurrentQuality(0);
+    }
+    if (qlLevels[1]['label'].indexOf('2160p') > -1 && qlLevels[2]['label'] == '1440p') {
+        jwpl.setCurrentQuality(3);
+    }
+    if (qlLevels[1]['label'].indexOf('2160p') > -1 && qlLevels[2]['label'] == '1080p') {
+        jwpl.setCurrentQuality(2);
+    }
+    updateQualityText();
+});
+jwpl.on('visualQuality', function(e, a) {
+    if (played && jwpl.getCurrentQuality() === 0) {
+        if (jwpl.getQualityLevels()[jwpl.getVisualQuality().level.index]['label'].indexOf('2160p') > -1) {
+            jwpl.setCurrentQuality(jwpl.getVisualQuality().level.index + 1);
+            console.log("kalite düşürüldü");
+        }
+    }
+});
+*/
+jwpl.on('levelsChanged', function() {
+	freezeCnt = 0;
+	updateQualityText();
+	jwFixAutoLabel(50);
+});
+jwpl.on('visualQuality', function() {
+    jwFixAutoLabel(50);
+});
+
+/*
+setInterval(function(){
+	if (played && jwpl.getCurrentQuality() === 0) {
+		var label = convertQualityLabel(jwpl.getQualityLevels()[jwpl.getVisualQuality().level.index]['width']);
+		if (label.indexOf('4320p') > -1) label = '4320p';
+		if (label.indexOf('2160p') > -1) label = '2160p';
+		if (label.indexOf('1440p') > -1) label = '1440p';
+		$('.ql').html('Oto Kalite: <b> <span style="font-weight:normal; font-size:11px; top:-1px; margin-left:2px; padding: 3px; padding-left:5px; padding-right:5px; border-radius: 5px; background:#1c89bd; color:#fff; position:relative;">'+label+'</span></b>');
+	}
+}, 1500);*/
+
+
+
+
+
+setInterval(function(){
+    if (played) {
+        if (jwpl.getCurrentQuality() > 0) {
+            updateTopAutoLabel();
+        } else {
+            var label = convertQualityLabel(jwpl.getQualityLevels()[jwpl.getVisualQuality().level.index]['width']);
+            $('.ql').html('Oto Kalite: <b><span class="ql-ust-label">'+label+'</span></b>');
+            updateTopAutoLabel(1);
+            jwFixAutoLabel();
+        }
+	}
+}, 1000);
+
+
+
+/*
+jwpl.on('levels', function(){
+    var curQualityIndex = jwpl.getCurrentQuality();
+    if (curQualityIndex === 1) {
+        jwpl.setCurrentQuality(0);
+    }
+});
+jwpl.on('buffer', function(e){
+    if (e.reason == 'stalled') {
+		freezeCnt++;
+        if (played && (autoQuality || (!autoQuality && freezeCnt > 10))) {
+            // played = 0;
+            var curQualityIndex = jwpl.getCurrentQuality();
+            if (curQualityIndex > 0) {
+                jwpl.setCurrentQuality(0);
+            }
+        }
+    }
+});
+*/
+
+$(function(){
+	$('body').on('click', '.jw-icon-hd .jw-option', function(){
+		autoQuality = 0;
+	});
+    /*$('body').on('DOMSubtreeModified', '.jw-auto-label', function(){
+        if ($(this).text() != '') {
+            $('.ql').html('Oto Kalite: <b><span class="ql-ust-label">'+$(this).text()+'</span></b>');
+        }
+    });*/
+    $('body').on('click', '.jw-settings-submenu-quality .jw-settings-content-item[aria-label="Otomatik"]', function(){
+        if ($(this).attr('aria-checked') == 'true') {
+            updateTopAutoLabel(1);
+        }
+    });
+    $('body').on('click', '.jw-settings-submenu-quality .jw-settings-content-item:not([aria-label="Otomatik"])', function(){
+        if ($(this).attr('aria-checked') == 'true') {
+            updateQualityText($(this).attr('aria-label'));
+        }
+    });
+    
+    /*	
+    $.ajax({	
+        url: 'https://cdn.doccloud.me/player/cnt1.php',	
+        type: "GET",	
+        timeout: 5000,	
+        success: function(){	
+            $.get('https://cdn.doccloud.me/player/succ1.php');	
+        },	
+        error: function() {	
+            $.get('https://cdn.doccloud.me/player/errx1.php');	
+        }	
+    });	
+    $.ajax({	
+        url: 'https://c.grammatico.xyz/player/cnt2.php',	
+        type: "GET",	
+        timeout: 5000,	
+        success: function(){	
+            $.get('https://cdn.doccloud.me/player/succ2.php');	
+        },	
+        error: function() {	
+            $.get('https://cdn.doccloud.me/player/errx2.php');	
+        }	
+    });*/
+});
+var failoverDoms = [
+    'jayaletchemi.xyz',
+    'hazareesingh.xyz',
+    'yakshyavicius.xyz',
+    'hakhamaneshi.xyz',
+    'vijayaletchmi.xyz',
+    'chamnanpadit.xyz',
+    'pergamenschicov.xyz',
+    'gstoettenbauer.xyz',
+    'scharnberger.xyz',
+    'wollschlaeger.xyz',
+    'mastropietro.xyz',
+    'papastavridis.xyz',
+    'grzegorzewski.xyz',
+    'krozeniowski.xyz',
+    'smieliauskas.xyz',
+    'schmiedeberg.xyz',
+    'shcherbakova.xyz',
+    'marchessault.xyz',
+    'sengenberger.xyz',
+    'schlotzhauer.xyz',
+];
+/*
+var failoverDoms = [
+    'imghub.us',
+    'picgals.live',
+    'wyphotos.com',
+    'imgdots.com',
+    'imgfs.co.uk',
+    'youimg.co.uk',
+    'imgpics.co.uk',
+    'picgals.cloud',
+    'mypixture.uk',
+    'mypixture.cloud',
+    'imgux.us',
+    'imgbiz.co.uk',
+    'mypixture.co.uk',
+    'imgurrr.com',
+    'photomagz.co.uk',
+    'imgurz.us',
+    'mypixture.org.uk',
+    'savimg.com',
+];*/
+var errorFragDom = '';
+jwpl.on('warning', function(e){
+    if (e.sourceError.type == 'networkError' && e.sourceError.details == 'fragLoadTimeOut') {
+        console.log('segmentError');
+        var fragUrl = e.sourceError.frag.relurl;
+        errorFragDom = fragUrl.split('://')[1].split('/')[0].replace(/^s[0-9]+\./, '');	
+    }
+});
+
+var di = 0;
+function getNextFailoverDom() {
+    if (di >= failoverDoms.length) di = 0;
+    var failoverDom = failoverDoms[di];
+    di++;
+    return failoverDom;
+}
+
+(function(open, send) {
+    XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
+        if (errorFragDom && failoverDoms) {
+            url = url.replace(errorFragDom, getNextFailoverDom());
+        }
+        open.apply(this, arguments);
+    };
+    XMLHttpRequest.prototype.send = function(data) {
+        send.apply(this, arguments);
+    }
+})(XMLHttpRequest.prototype.open, XMLHttpRequest.prototype.send);
+</script>
+
+</body>
+</html>
